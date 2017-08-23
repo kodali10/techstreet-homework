@@ -4,10 +4,22 @@
     placeholder="Login"
     formControlName="username"
   />
+  <p
+    *ngIf="!loginForm.get('username').valid && loginForm.get('username').touched "
+    style="color:rgba(255, 0, 0, 0.5)"
+  >
+    Please enter a login name
+  </p>
   <input
     placeholder="Password"
     type="password"
     formControlName="password"
   />
+  <p
+    *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched "
+     style="color:rgba(255, 0, 0, 0.5)"
+  >
+    Please enter password
+  </p>
   <button type="Submit">Submit</button>
 </form>
