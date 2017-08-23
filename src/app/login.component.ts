@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularService } from '../angular/service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {LoginService} from './login.service';
 
 @Component({
   selector: 'login-component',
   templateUrl: './login.component.html'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loggedIn:  string = null;
 
@@ -17,8 +17,8 @@ export class LoginComponent {
     private _loginService: LoginService
   ) {
     this.loginForm = this._builder.group({
-      username: '',
-      password: ''
+      username: new FormControl(null),
+      password: new FormControl(null)
     });
   }
 
@@ -28,6 +28,6 @@ export class LoginComponent {
   }
   save() {
     this._service.setDirective(2);
-    this._loginService.login('', '');
+    this._loginService.login(this.loginForm.value.username, this.loginForm.value.password);
   }
 }
